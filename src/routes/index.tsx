@@ -8,6 +8,11 @@ import {
 import { faqs, publishedServices } from "@/lib/site-config";
 import { localBusinessLd, pageHead } from "@/lib/seo";
 import lab from "@/assets/hero-lab.jpg";
+import { MedicalPhotoSection } from "@/components/site/MedicalPhotoSection";
+import servicesBackground from "@/assets/services-background.webp";
+import servicesMobileBackground from "@/assets/services-background-mobile.webp";
+import careBackground from "@/assets/care-background.webp";
+import careMobileBackground from "@/assets/care-background-mobile.webp";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -61,16 +66,17 @@ function Home() {
         </Reveal>
       </section>
 
-      <section className="bg-surface py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <MedicalPhotoSection label="Medical services" image={servicesBackground} mobileImage={servicesMobileBackground}>
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <Reveal><SectionHeading eyebrow="Medical services" title="Types of medical examinations and tests" intro="Explore the services you can enquire about. Our team will confirm what is currently available for your requirement." /></Reveal>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {publishedServices.map((s) => <Reveal key={s.slug}><ServiceCard service={s} /></Reveal>)}
           </div>
         </div>
-      </section>
+      </MedicalPhotoSection>
 
-      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+      <section className="relative bg-background">
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <Reveal><SectionHeading center eyebrow="How it works" title="How the medical examination enquiry process works" /></Reveal>
         <ol className="mt-12 grid gap-6 md:grid-cols-3">
           {steps.map((s, i) => (
@@ -85,9 +91,11 @@ function Home() {
           ))}
         </ol>
         <p className="mt-6 text-center text-sm text-muted-foreground">Submitting an enquiry does not automatically create a confirmed appointment.</p>
+        </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+      <MedicalPhotoSection label="Why choose Himalaya Health Care" image={careBackground} mobileImage={careMobileBackground} tone="white">
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <Reveal><SectionHeading center eyebrow="Why choose us" title="Why candidates choose Himalaya Health Care" /></Reveal>
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {reasons.map((r) => (
@@ -101,9 +109,10 @@ function Home() {
           ))}
         </div>
         <Reveal className="mt-16"><CandidateChoice /></Reveal>
-      </section>
+        </div>
+      </MedicalPhotoSection>
 
-      <section className="bg-surface py-20">
+      <section className="relative bg-surface py-20">
         <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[1fr_1.5fr] lg:px-8">
           <Reveal>
             <SectionHeading eyebrow="FAQs" title="Frequently asked questions" intro="Answers to common questions about medical examinations for overseas employment and travel." />
