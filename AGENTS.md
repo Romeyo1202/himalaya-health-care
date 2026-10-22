@@ -10,6 +10,7 @@
 <!-- LOVABLE:END -->
 
 ## Project rules
+- Homepage medical photography uses the isolated `MedicalPhotoSection` grid/sticky layer with optimised responsive images and existing CSS reveals; keep this treatment out of shared service components so the Services page stays unchanged.
 - Business details, services, destinations, FAQs and form options live in `src/lib/site-config.ts`; contact values come from `VITE_*` env vars and empty means hidden — never hardcode invented business data.
 - The enquiry form is WhatsApp click-to-chat only (no database persistence); the privacy policy describes this, so update it if storage is ever added.
 - Enquiry validation and WhatsApp message/URL building live in `src/lib/enquiry.ts` with tests in `src/lib/enquiry.test.ts`.
