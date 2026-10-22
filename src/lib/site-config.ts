@@ -25,7 +25,6 @@ export const navLinks = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About Us" },
   { to: "/services", label: "Medical Services" },
-  { to: "/destinations", label: "Destinations" },
   { to: "/faq", label: "FAQs" },
   { to: "/contact", label: "Contact" },
 ] as const;
@@ -182,7 +181,7 @@ export const faqs: { q: string; a: string }[] = [
   },
   {
     q: "Which destinations do you currently serve?",
-    a: "Our Destinations page lists the countries we currently handle enquiries for. Requirements differ between destinations, so please contact us to confirm before your visit.",
+    a: "We carry out pre-medical examinations based on the country each candidate requires. Requirements differ between destinations, so please contact us to confirm before your visit.",
   },
   {
     q: "What information should I provide when submitting an enquiry?",
