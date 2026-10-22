@@ -84,7 +84,7 @@
   --surface: oklch(0.975 0.004 250);
   --shadow-soft: 0 10px 30px -12px color-mix(in oklab, var(--navy) 22%, transparent);
   --shadow-lift: 0 20px 40px -16px color-mix(in oklab, var(--primary) 35%, transparent);
-  --medical-photo-opacity: 0.35;
+  --medical-photo-opacity: 0.65;
   --medical-photo-overlay: color-mix(in oklab, var(--sky) 6%, transparent);
   --medical-photo-edge: linear-gradient(to bottom, var(--background), transparent 12%, transparent 88%, var(--background));
   --chart-1: oklch(0.52 0.13 250);
