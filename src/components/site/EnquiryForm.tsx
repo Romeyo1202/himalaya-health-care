@@ -14,7 +14,7 @@ import { countryList, occupations, serviceOptions, siteConfig } from "@/lib/site
 const selectCls =
   "flex h-11 w-full rounded-md border border-input bg-background px-3 text-base shadow-xs transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:text-sm";
 
-function Field({ id, label, required, error, children, hint }: { id: string; label: string; required?: boolean; error?: string; hint?: string; children: React.ReactNode }) {
+function Field({ id, label, required, error, children, hint }: { id: string; label: string; required?: boolean; error?: string | undefined; hint?: string | undefined; children: React.ReactNode }) {
   return (
     <div className="space-y-1.5">
       <Label htmlFor={id} className="font-semibold text-navy">
@@ -27,7 +27,7 @@ function Field({ id, label, required, error, children, hint }: { id: string; lab
   );
 }
 
-export function EnquiryForm({ defaultService, defaultDestination }: { defaultService?: string; defaultDestination?: string }) {
+export function EnquiryForm({ defaultService, defaultDestination }: { defaultService?: string | undefined; defaultDestination?: string | undefined }) {
   const wa = normalizeWhatsAppNumber(siteConfig.whatsappNumber);
   const [waUrl, setWaUrl] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
