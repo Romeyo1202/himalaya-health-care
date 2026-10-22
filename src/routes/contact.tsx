@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Clock, Mail, MapPin, MessageCircle, Navigation, Phone } from "lucide-react";
+import { Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { EnquiryForm } from "@/components/site/EnquiryForm";
@@ -26,7 +26,6 @@ function Contact() {
   const { service, destination } = Route.useSearch();
   const wa = normalizeWhatsAppNumber(siteConfig.whatsappNumber);
   const addr = [siteConfig.address, siteConfig.city, siteConfig.state, siteConfig.country].filter(Boolean).join(", ");
-  const directions = addr ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addr)}` : "";
   const rows = [
     { icon: Phone, label: "Phone", value: siteConfig.phone, href: siteConfig.phone ? `tel:${siteConfig.phone}` : undefined },
     { icon: Mail, label: "Email", value: siteConfig.email, href: siteConfig.email ? `mailto:${siteConfig.email}` : undefined },
@@ -74,11 +73,6 @@ function Contact() {
               )}
               {siteConfig.email && (
                 <Button asChild variant="outline"><a href={`mailto:${siteConfig.email}`}><Mail /> Email us</a></Button>
-              )}
-              {directions && (
-                <Button asChild variant="outline">
-                  <a href={directions} target="_blank" rel="noopener noreferrer"><Navigation /> Get directions</a>
-                </Button>
               )}
             </div>
           </div>
