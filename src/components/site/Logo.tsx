@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import logoAsset from "@/assets/logo.png.asset.json";
 
-const logoUrl = logoAsset.url;
+// The header/footer mark is literally the same file the browser tab icon uses.
+const logoUrl = "/favicon.png";
 
 /** Official Himalaya Health Care mark, supplied by the business. */
 export function Logo({ inverted = false }: { inverted?: boolean }) {
@@ -11,8 +11,8 @@ export function Logo({ inverted = false }: { inverted?: boolean }) {
         src={logoUrl}
         alt=""
         aria-hidden="true"
-        width={1426}
-        height={1426}
+        width={256}
+        height={256}
         decoding="async"
         className={`h-11 w-11 shrink-0 rounded-xl ${inverted ? "shadow-soft" : ""}`}
       />
