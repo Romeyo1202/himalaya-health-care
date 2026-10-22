@@ -13,3 +13,4 @@
 - Business details, services, destinations, FAQs and form options live in `src/lib/site-config.ts`; contact values come from `VITE_*` env vars and empty means hidden — never hardcode invented business data.
 - The enquiry form is WhatsApp click-to-chat only (no database persistence); the privacy policy describes this, so update it if storage is ever added.
 - Enquiry validation and WhatsApp message/URL building live in `src/lib/enquiry.ts` with tests in `src/lib/enquiry.test.ts`.
+- The brand mark is the business-supplied logo (`src/assets/logo.png.asset.json`, rendered by `src/components/site/Logo.tsx`, mirrored in `public/favicon.png` and `public/apple-touch-icon.png`); never swap it for a generated placeholder so header, footer and browser icon stay identical.
