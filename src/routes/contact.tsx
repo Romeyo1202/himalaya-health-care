@@ -1,12 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { Clock, Mail, MapPin, MessageCircle, Navigation, Phone } from "lucide-react";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { EnquiryForm } from "@/components/site/EnquiryForm";
 import { CandidateChoice, PageHero, VisaDisclaimer } from "@/components/site/Sections";
 import { normalizeWhatsAppNumber } from "@/lib/enquiry";
-import { siteConfig } from "@/lib/site-config";
-import { breadcrumbLd, pageHead } from "@/lib/seo";
+import { businessHoursLines, siteConfig } from "@/lib/site-config";
+import { breadcrumbLd, localBusinessLd, pageHead } from "@/lib/seo";
 
 const search = z.object({
   service: z.string().max(120).optional().catch(undefined),
@@ -17,7 +17,7 @@ export const Route = createFileRoute("/contact")({
   validateSearch: search,
   head: () => ({
     ...pageHead("/contact", "Contact & Enquiry — Himalaya Health Care", "Send a medical examination enquiry to Himalaya Health Care on WhatsApp. Ask about services, charges and appointment availability with no obligation to book."),
-    scripts: [breadcrumbLd("Contact", "/contact")],
+    scripts: [breadcrumbLd("Contact", "/contact"), localBusinessLd()],
   }),
   component: Contact,
 });
@@ -26,11 +26,11 @@ function Contact() {
   const { service, destination } = Route.useSearch();
   const wa = normalizeWhatsAppNumber(siteConfig.whatsappNumber);
   const addr = [siteConfig.address, siteConfig.city, siteConfig.state, siteConfig.country].filter(Boolean).join(", ");
+  const directions = addr ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addr)}` : "";
   const rows = [
     { icon: Phone, label: "Phone", value: siteConfig.phone, href: siteConfig.phone ? `tel:${siteConfig.phone}` : undefined },
     { icon: Mail, label: "Email", value: siteConfig.email, href: siteConfig.email ? `mailto:${siteConfig.email}` : undefined },
     { icon: MapPin, label: "Address", value: addr },
-    { icon: Clock, label: "Business hours", value: siteConfig.hours },
   ];
   return (
     <>
@@ -54,6 +54,17 @@ function Contact() {
                   </div>
                 </li>
               ))}
+              <li className="flex gap-3">
+                <Clock className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Business hours</p>
+                  {businessHoursLines.length ? (
+                    businessHoursLines.map((h) => <p key={h} className="font-semibold text-navy">{h}</p>)
+                  ) : (
+                    <p className="text-sm italic text-muted-foreground">To be published soon</p>
+                  )}
+                </div>
+              </li>
             </ul>
             <div className="mt-6 flex flex-col gap-3">
               {wa && (
@@ -63,6 +74,11 @@ function Contact() {
               )}
               {siteConfig.email && (
                 <Button asChild variant="outline"><a href={`mailto:${siteConfig.email}`}><Mail /> Email us</a></Button>
+              )}
+              {directions && (
+                <Button asChild variant="outline">
+                  <a href={directions} target="_blank" rel="noopener noreferrer"><Navigation /> Get directions</a>
+                </Button>
               )}
             </div>
           </div>
