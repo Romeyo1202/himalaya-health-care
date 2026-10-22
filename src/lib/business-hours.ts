@@ -24,17 +24,22 @@ export function splitHoursLines(raw: string): string[] {
 }
 
 function dayFromToken(token: string): Weekday | null {
-  const token_ = token.toLowerCase().replace(/[^a-z]/g, "");
-  if (!token_) return null;
-  const matches = DAYS.filter((d) => d.toLowerCase().startsWith(token_));
-  return matches.length === 1 ? matches[0] : null;
+  const key = token.toLowerCase().replace(/[^a-z]/g, "");
+  if (!key) return null;
+  const matches = DAYS.filter((d) => d.toLowerCase().startsWith(key));
+  return matches.length === 1 ? matches[0] ?? null : null;
 }
 
 function daysFromRange(start: Weekday, end: Weekday): Weekday[] {
   const first = DAYS.indexOf(start);
   const last = DAYS.indexOf(end);
   const span = last >= first ? last - first : DAYS.length - first + last;
-  return Array.from({ length: span + 1 }, (_, i) => DAYS[(first + i) % DAYS.length]);
+  const days: Weekday[] = [];
+  for (let i = 0; i <= span; i += 1) {
+    const day = DAYS[(first + i) % DAYS.length];
+    if (day) days.push(day);
+  }
+  return days;
 }
 
 function parseDays(part: string): Weekday[] | null {
@@ -43,8 +48,8 @@ function parseDays(part: string): Weekday[] | null {
 
   const range = text.match(/^(.+?)\s*(?:-|–|to)\s*(.+)$/i);
   if (range) {
-    const from = dayFromToken(range[1]);
-    const to = dayFromToken(range[2]);
+    const from = dayFromToken(range[1] ?? "");
+    const to = dayFromToken(range[2] ?? "");
     if (from && to) return daysFromRange(from, to);
   }
 
@@ -59,7 +64,9 @@ function parseDays(part: string): Weekday[] | null {
 function to24(raw: string): string | null {
   const m = raw.trim().toLowerCase().match(/^(\d{1,2})(?::(\d{2}))?\s*(am|pm)?$/);
   if (!m) return null;
-  const [, hourText, minuteText, meridiem] = m;
+  const hourText = m[1] ?? "";
+  const minuteText = m[2] ?? "";
+  const meridiem = m[3] ?? "";
   // A single-digit hour with no am/pm is ambiguous, so it is not converted.
   if (!meridiem && hourText.length < 2) return null;
   let hour = Number(hourText);
@@ -82,8 +89,8 @@ export function parseHoursLine(line: string): HoursRange | null {
     .map((t) => t.trim())
     .filter(Boolean);
   if (times.length !== 2) return null;
-  const opens = to24(times[0]);
-  const closes = to24(times[1]);
+  const opens = to24(times[0] ?? "");
+  const closes = to24(times[1] ?? "");
   if (!opens || !closes) return null;
   return { days, opens, closes };
 }
@@ -99,8 +106,8 @@ export function openingHoursSpecification(raw: string) {
   if (ranges.some((r) => !r)) return [];
   return ranges.map((r) => ({
     "@type": "OpeningHoursSpecification",
-    dayOfWeek: r!.days,
-    opens: r!.opens,
-    closes: r!.closes,
+    dayOfWeek: r?.days ?? [],
+    opens: r?.opens ?? "",
+    closes: r?.closes ?? "",
   }));
 }
