@@ -50,12 +50,19 @@ export function Footer() {
         <div className="mx-auto max-w-7xl space-y-4 px-4 py-6 text-xs leading-relaxed text-navy-foreground/65 sm:px-6 lg:px-8">
           <p>{footerDisclaimer}</p>
           <div className="flex flex-col justify-between gap-3 sm:flex-row">
-            <p>© {new Date().getFullYear()} Himalaya Health Care. All rights reserved.</p>
+            <p className="flex flex-wrap items-center gap-x-2">
+              <span>© {new Date().getFullYear()} Himalaya Health Care. All rights reserved.</span>
+              <span aria-hidden="true" className="hidden text-navy-foreground/30 sm:inline">|</span>
+              <span>
+                Built by <span className="font-semibold text-navy-foreground/85">Qorvex</span>
+              </span>
+            </p>
             <div className="flex gap-5">
               <Link to="/privacy-policy" className="hover:text-navy-foreground">Privacy Policy</Link>
               <Link to="/terms" className="hover:text-navy-foreground">Terms and Disclaimer</Link>
             </div>
           </div>
+
         </div>
       </div>
     </footer>
