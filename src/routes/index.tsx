@@ -6,7 +6,7 @@ import {
   CandidateChoice, EnquiryCta, FaqList, Reveal, SectionHeading, ServiceCard, VisaDisclaimer,
 } from "@/components/site/Sections";
 import { faqs, publishedServices } from "@/lib/site-config";
-import { pageHead } from "@/lib/seo";
+import { localBusinessLd, pageHead } from "@/lib/seo";
 import lab from "@/assets/hero-lab.jpg";
 
 export const Route = createFileRoute("/")({
@@ -21,6 +21,7 @@ export const Route = createFileRoute("/")({
         type: "application/ld+json",
         children: JSON.stringify({ "@context": "https://schema.org", "@type": "WebSite", name: "Himalaya Health Care", url: "/" }),
       },
+      localBusinessLd(),
     ],
   }),
   component: Home,

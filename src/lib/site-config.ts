@@ -3,6 +3,8 @@
  * (see .env.example). Empty values are treated as "not configured" and the
  * related contact actions are hidden — never fill these with invented data.
  */
+import { splitHoursLines } from "./business-hours";
+
 const env = import.meta.env;
 const clean = (v: unknown) => (typeof v === "string" ? v.trim() : "");
 
@@ -20,6 +22,9 @@ export const siteConfig = {
   hours: clean(env["VITE_BUSINESS_HOURS"]),
   privacyNoticeVersion: "2026-10-v1",
 };
+
+/** Opening hours as the separate lines the centre wrote ("|" separates them). */
+export const businessHoursLines = splitHoursLines(siteConfig.hours);
 
 export const navLinks = [
   { to: "/", label: "Home" },

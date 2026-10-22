@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
-import { footerDisclaimer, navLinks, publishedServices, siteConfig } from "@/lib/site-config";
+import { Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { businessHoursLines, footerDisclaimer, navLinks, publishedServices, siteConfig } from "@/lib/site-config";
 import { normalizeWhatsAppNumber } from "@/lib/enquiry";
 import { Logo } from "./Logo";
 
@@ -39,6 +39,9 @@ export function Footer() {
             {siteConfig.phone && <li><a href={`tel:${siteConfig.phone}`} className="flex items-center gap-2 hover:text-navy-foreground"><Phone className="h-4 w-4" /> {siteConfig.phone}</a></li>}
             {siteConfig.email && <li><a href={`mailto:${siteConfig.email}`} className="flex items-center gap-2 hover:text-navy-foreground"><Mail className="h-4 w-4" /> {siteConfig.email}</a></li>}
             {addr && <li className="flex items-start gap-2"><MapPin className="mt-0.5 h-4 w-4 shrink-0" /> {addr}</li>}
+            {businessHoursLines.map((h) => (
+              <li key={h} className="flex items-start gap-2"><Clock className="mt-0.5 h-4 w-4 shrink-0" /> {h}</li>
+            ))}
             {!wa && !siteConfig.phone && !siteConfig.email && <li>Contact details will be published soon. <Link to="/contact" className="underline">Send an enquiry</Link>.</li>}
           </ul>
         </div>
