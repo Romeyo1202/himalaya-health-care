@@ -3,9 +3,9 @@ import { ArrowRight, ClipboardList, Eye, HeartPulse, Lock, MessagesSquare, Calen
 import { Button } from "@/components/ui/button";
 import { Hero } from "@/components/site/Hero";
 import {
-  CandidateChoice, DestinationCard, EnquiryCta, FaqList, Reveal, SectionHeading, ServiceCard, VisaDisclaimer,
+  CandidateChoice, EnquiryCta, FaqList, Reveal, SectionHeading, ServiceCard, VisaDisclaimer,
 } from "@/components/site/Sections";
-import { faqs, publishedDestinations, publishedServices } from "@/lib/site-config";
+import { faqs, publishedServices } from "@/lib/site-config";
 import { pageHead } from "@/lib/seo";
 import lab from "@/assets/hero-lab.jpg";
 
@@ -84,15 +84,6 @@ function Home() {
           ))}
         </ol>
         <p className="mt-6 text-center text-sm text-muted-foreground">Submitting an enquiry does not automatically create a confirmed appointment.</p>
-      </section>
-
-      <section className="bg-sky py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Reveal><SectionHeading eyebrow="Destinations" title="Destinations we serve" intro="Medical examination enquiries for candidates travelling to these countries. Requirements may vary by destination, visa category, employer and authority." /></Reveal>
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {publishedDestinations.map((d) => <Reveal key={d.slug}><DestinationCard d={d} /></Reveal>)}
-          </div>
-        </div>
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
